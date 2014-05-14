@@ -9,12 +9,13 @@
           <%=f.submit 'Сохранить время заявки', class: 'btn btn-primary' %>
       <% end %>
         <br>
-        <p><strong>Дата:</strong><%= l(@request.date) %></p>
-        <p><strong>Email:</strong><%= @request.email %></p>
-        <p><strong>Проблема:</strong></p>
+        <p><strong>Дата: </strong><%= l(@request.date) %></p>
+        <p><strong>Email: </strong><%= @request.email %></p>
+        <p><strong>Услугa: </strong><%= @request.service %></p>
+        <p><strong>Проблема: </strong></p>
                 <p><%= @request.question %></p>
         <p><strong>Является клиентом:</strong><%= @request.bank_customer ? ' Да' : ' Нет'%></p>
-        <p><strong>Номер счета:</strong> <%= @request.bank_account %></p>
+        <p><strong>Номер счета: </strong> <%= @request.bank_account %></p>
       <%- if @requests.any? %>
         <h4>Other requests on that day:<h4>
         <table class='table'>
