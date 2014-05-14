@@ -1,0 +1,76 @@
+<div class=container>
+  <div class='row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-6'>
+      <hr>
+      <h3>1. Выберите желаемую услугу:</h3>
+      <br>
+      <div class='form-group'>
+        <select id='services' class='form-control'>
+          <option>предоставление технической поддержки</option>
+          <option>reception</option>
+          <option>назначение встреч клиентов с сотрудниками отделений с целью дальнейшей продажи продукта</option>
+          <option>работа с жалобами</option>
+          <option>работа с должниками</option>
+          <option>обслуживание держателей платежных карт</option>
+          <option>послепродажное обслуживание</option>
+          <option>продажа банковских продуктов</option>
+          <option>информация о местоположении, контактах, режиме работы отделений</option>
+          <option>информация о продуктах банка</option>
+        </select>
+      </div>
+      <hr>
+      <h3>2. Определите дату заявки и свободное время:</h3>
+      <br>
+      <%= search_form_for @q, url: new_request_url, class: 'form-inline' do |f| %>
+          <div class='form-group'>
+              <%= f.text_field :date_eq, id: 'datepicker', class:'form-control' %>
+              <%= f.hidden_field :operator_id_eq, id: 'search_operator_id' %>
+          </div>
+          <%= f.submit 'Поиск', class: 'btn btn-primary' %>
+      <% end %>
+        <br >
+        <h4>Записи в этот день:</h4>
+        <%- @requests.each do |request| %>
+            <div class='thumbnail'><%= l(request.time) %></div>
+        <% end %>
+      <hr>
+      <h3>3. Завершите заполнение заявки:</h3>
+      <br>
+
+      <%= form_for @request, url: requests_path do |f| %>
+        <%=f.hidden_field :date, id: 'create-datepicker' %>
+        <div class="form-group">
+          <%=f.label :time, 'Желаемое время приема'%>
+          <%=f.time_field :time, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+            <%=f.label :email, 'Адрес электронной почты'%>
+            <%=f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%=f.label :full_name, 'Ваше полное имя'%>
+          <%=f.text_field :full_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%=f.label :question, 'Опишите вашу проблему'%>
+          <%=f.text_area :question, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%=f.label :bank_customer, 'Клиент нашего банка?'%>
+          <%=f.check_box :bank_customer, id: 'client' %>
+        </div>
+        <div class="form-group" id='account'>
+          <%=f.label :bank_account, 'Номер счета'%>
+          <%=f.number_field :bank_account, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%=f.hidden_field :operator_id, id: 'operator_id'%>
+          <%=f.hidden_field :service, id: 'service_hidden'%>
+          <%=f.submit 'Отправить заявку', class: 'btn btn-block btn-primary'  %>
+        </div>
+      <% end %>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+</div>

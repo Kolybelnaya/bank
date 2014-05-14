@@ -1,0 +1,42 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <%= search_form_for @q, url: completed_operator_requests_url, class: 'form-inline' do |f| %>
+          <div class='form-group'>
+            <%= f.text_field :date_gteq, id: 'gteq', class:'form-control', placeholder: 'Дата от' %>
+          </div>
+            <div class='form-group'>
+              <%= f.text_field :date_lteq, id: 'lteq', class:'form-control', placeholder: 'до' %>
+            </div>
+
+                <%= f.submit 'Поиск', class: 'btn btn-primary' %>
+                <% end %>
+      <table class='table'>
+
+        <thead>
+        <tr>
+          <th>Эл. почта</th>
+          <th>Проблема</th>
+          <th>Дата и время</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%- @requests.each do |request|%>
+            <tr>
+              <td><%=request.email%></td>
+              <td><%=request.question%></td>
+              <td><%=l(request.date)%><%=l(request.time)%></td>
+              <td>
+                <span class='btn-group pull-left'>
+                    <%= link_to 'Подробнее', edit_operator_request_path(request), class: 'btn btn-primary btn-sm'%>
+                    <%= link_to 'Удалить', operator_request_path(request), method: :delete, class: 'btn btn-danger btn-sm' %>
+                              </span>
+                              </td>
+                              </tr>
+          <% end %>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>

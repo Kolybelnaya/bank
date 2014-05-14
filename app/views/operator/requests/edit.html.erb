@@ -1,0 +1,56 @@
+<div class=container>
+  <div class='row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-6'>
+      <%= form_for @request, url: operator_request_path(@request.id), html: {class: 'form-inline'} do |f| %>
+          <div class='form-group'>
+            <%=f.time_field :time, class: 'form-control'%>
+          </div>
+          <%=f.submit 'Сохранить время заявки', class: 'btn btn-primary' %>
+      <% end %>
+        <br>
+        <p><strong>Дата:</strong><%= l(@request.date) %></p>
+        <p><strong>Email:</strong><%= @request.email %></p>
+        <p><strong>Проблема:</strong></p>
+                <p><%= @request.question %></p>
+        <p><strong>Является клиентом:</strong><%= @request.bank_customer ? ' Да' : ' Нет'%></p>
+        <p><strong>Номер счета:</strong> <%= @request.bank_account %></p>
+      <%- if @requests.any? %>
+        <h4>Other requests on that day:<h4>
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Эл. почта</th>
+                    <th>Проблема</th>
+                    <th>Дата и время</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%- @requests.each do |request|%>
+                    <tr>
+                        <td><%=request.email%></td>
+                        <td><%=request.question%></td>
+                        <td><%=l(request.date)%><%=l(request.time)%></td>
+                        <td>
+                        <span class='btn-group pull-left'>
+                            <%= link_to 'Подробнее', edit_operator_request_path(request), class: 'btn btn-primary btn-sm'%>
+                            <%= link_to "Подтвердить", operator_request_accept_path(request), :method => :put, class: 'btn btn-sm btn-success' %>
+                            <%= link_to 'Удалить', operator_request_path(request), method: :delete, class: 'btn btn-danger btn-sm' %>
+                        </span>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class='col-md-3'>
+      <%- if @request.accepted? %>
+          <p class='label label-success'>Подтвержденa</p>
+      <% else %>
+          <%= link_to "Подтвердить", operator_request_accept_path(@request.id), :method => :put, class: 'btn btn-success' %>
+          <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-right">
+  <%-unless current_user %>
+      <li><a href="/users/sign_in">Войти</a></li>
+      <li><a href="/users/sign_up">Зарегистрироваться</a></li>
+  <% else %>
+      <li><%= link_to 'Редактировать профиль', edit_user_registration_path(current_user) %></li>
+      <li><%= link_to 'Выход', destroy_user_session_path, method: :delete %></li>
+  <% end %>
+</ul>

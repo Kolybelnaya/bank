@@ -1,0 +1,33 @@
+<div class=container>
+  <div class='row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-6'>
+        <h2>Редактирование профиля</h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+          <div class="form-inputs">
+            <%= f.input :email, required: true, autofocus: true, label: 'Адрес электронной почты' %>
+
+            <!--<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>-->
+              <!--<p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>-->
+            <!--<% end %>-->
+
+            <%= f.input :password, autocomplete: "off", hint: "оставьте пустым, если не планируете менять пароль", required: false , label: 'Новый пароль'%>
+            <%= f.input :password_confirmation, required: false, label: 'Подтверджение пароля' %>
+            <%= f.input :current_password, hint: "введите текущий пароль для подтверждения изменений", required: true, label: 'Текущий пароль' %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Обновить профиль" %>
+          </div>
+        <% end %>
+        <br>
+        <p><%= link_to "Удалить профиль", registration_path(resource_name), data: { confirm: "Вы уверены?" }, method: :delete %></p>
+
+        <%= link_to "Назад", :back %>
+
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+</div>
