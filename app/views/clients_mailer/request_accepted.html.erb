@@ -1,4 +1,4 @@
 <p>Ваша заявка по поводу услуги <%= @request.service%> принята.</p>
-<p>Вы можете прийти <%= I18n.l(@request.date)%> в  <%= I18n.l(formatted_time(@request.time))%>, тем самым избежав
+<p>Вы можете прийти <%= I18n.l(@request.date)%> в  <%= I18n.l(ApplicationHelper::formatted_time(@request.time))%>, тем самым избежав
   ожидания оператора.          </p>
 <p>С уважением, команда АльфаКредит банка</p>
