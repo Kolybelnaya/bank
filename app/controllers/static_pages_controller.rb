@@ -8,4 +8,7 @@ class StaticPagesController < ApplicationController
 
   def contact_center
   end
+
+  def help
+  end
 end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # Example of regular route:
      get 'index' => 'static_pages#index'
      get 'contact_center' => 'static_pages#contact_center'
+      get 'help' => 'static_pages#help'
   resources :requests, only: [:new, :create ]
 
   namespace :operator do

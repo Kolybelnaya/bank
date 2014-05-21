@@ -1,6 +1,8 @@
 class Request < ActiveRecord::Base
   include AASM
 
+  validates :date, :time, presence: true
+
   belongs_to :operator, class_name: 'User'
 
   scope :by_date, ->(date) { where(date: date)}
