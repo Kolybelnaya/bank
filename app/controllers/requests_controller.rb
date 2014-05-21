@@ -1,26 +1,28 @@
 class RequestsController < ApplicationController
 
+  before_action :set_search
+
   def new
     @request = Request.new()
-    @q = Request.search(params[:q])
+
     @requests = @q.result
   end
 
   def create
     @request = Request.new(request_params)
-
-    respond_to do |format|
       if @request.save
-        format.html { redirect_to contact_center_path, notice: print_request(@request) }
+        redirect_to contact_center_path, notice: print_request(@request)
       else
-        format.html { render :new }
+        render :new
       end
-    end
   end
 
 
-
   private
+
+  def set_search
+    @q = Request.search(params[:q])
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
@@ -29,6 +31,6 @@ class RequestsController < ApplicationController
   end
 
   def print_request(request)
-    'Ваша заявка будет рассмотрена оператором, ожидайте подтверждения по email; Заявленные дата и время: '+I18n.l(request.date)+I18n.l(request.time)
+    'Ваша заявка будет рассмотрена оператором, ожидайте подтверждения по email; Заявленные дата и время: '+I18n.l(request.date)+I18n.l(request.time.in_time_zone('Moscow'))
   end
 end

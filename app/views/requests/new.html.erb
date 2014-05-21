@@ -24,15 +24,19 @@
       <br>
       <%= search_form_for @q, url: new_request_url, class: 'form-inline' do |f| %>
           <div class='form-group'>
-              <%= f.text_field :date_eq, id: 'datepicker', class:'form-control' %>
+              <%= f.text_field :date_eq, id: 'datepicker', class:'form-control', required: true %>
               <%= f.hidden_field :operator_id_eq, id: 'search_operator_id' %>
           </div>
           <%= f.submit 'Поиск', class: 'btn btn-primary' %>
       <% end %>
         <br >
         <h4>Записи в этот день:</h4>
-        <%- @requests.each do |request| %>
-            <div class='thumbnail'><%= l(request.time) %></div>
+        <%- if @requests && @requests.any? %>
+            <%- @requests.each do |request| %>
+                <div class='thumbnail'><%= l(request.time) %></div>
+            <% end %>
+        <% else %>
+          нет заявок на эту дату
         <% end %>
       <hr>
       <h3>3. Завершите заполнение заявки:</h3>
@@ -42,7 +46,7 @@
         <%=f.hidden_field :date, id: 'create-datepicker' %>
         <div class="form-group">
           <%=f.label :time, 'Желаемое время приема'%>
-          <%=f.time_field :time, class: 'form-control'%>
+          <%=f.time_field :time, class: 'form-control',required: true%>
         </div>
         <div class="form-group">
             <%=f.label :email, 'Адрес электронной почты'%>

@@ -6,9 +6,12 @@ class CreateApplications < ActiveRecord::Migration
       t.string :full_name
       t.text :question
       t.boolean :bank_customer
-      t.integer :bank_account
+      t.string :bank_account
       t.date :date
       t.time :time
+      t.time :start
+      t.time :finish
+      t.integer :service_time
       t.integer :operator_id
       t.string :aasm_state
 

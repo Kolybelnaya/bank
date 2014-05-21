@@ -1,7 +1,6 @@
 <div class=container>
   <div class='row'>
-    <div class='col-md-3'></div>
-    <div class='col-md-6'>
+    <div class='col-md-9'>
       <%= form_for @request, url: operator_request_path(@request.id), html: {class: 'form-inline'} do |f| %>
           <div class='form-group'>
             <%=f.time_field :time, class: 'form-control'%>
@@ -33,7 +32,7 @@
                     <tr>
                         <td><%=request.email%></td>
                         <td><%=request.question%></td>
-                        <td><%=l(request.date)%><%=l(request.time)%></td>
+                        <td><%=l(request.date)%><%=l(formatted_time(request.time))%></td>
                         <td>
                         <span class='btn-group pull-left'>
                             <%= link_to 'Подробнее', edit_operator_request_path(request), class: 'btn btn-primary btn-sm'%>

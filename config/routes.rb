@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     resources :requests, only: [:edit, :update, :destroy ] do
       get 'unaccepted', on: :collection
       get 'completed', on: :collection
+      get 'today', on: :collection
+      put 'start'
+      put 'finish'
       put 'accept'
     end
   end

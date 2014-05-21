@@ -1,7 +1,10 @@
 class Request < ActiveRecord::Base
   include AASM
 
+  after_create :set_time
+
   validates :date, :time, presence: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 
   belongs_to :operator, class_name: 'User'
 
@@ -20,8 +23,11 @@ class Request < ActiveRecord::Base
     end
   end
 
+  def set_time
+    update_attribute(:time, time - Time.now.in_time_zone('Moscow').utc_offset )
+  end
+
   def send_notification
-    puts 'asdasdasd'
-    ClientsMailer.request_accepted(self).deliver
+      ClientsMailer.request_accepted(self).deliver
   end
 end

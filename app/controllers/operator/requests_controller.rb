@@ -12,6 +12,10 @@ class Operator::RequestsController < ApplicationController
     @requests = @q.result
   end
 
+  def today
+    @requests = current_user.requests.accepted.by_date(DateTime.now.to_date)
+  end
+
   def edit
     @request = Request.find(params[:id])
     @requests = current_user.requests.by_date(@request.date).where.not(id: @request.id)
@@ -32,6 +36,19 @@ class Operator::RequestsController < ApplicationController
   def accept
     @request = Request.find(params[:request_id])
     @request.accept!
+    redirect_to :back
+  end
+
+  def start
+    @request = Request.find(params[:request_id])
+    @request.update_attribute(:start, Time.now)
+    redirect_to :back
+  end
+
+  def finish
+    @request = Request.find(params[:request_id])
+    @request.update_attribute(:finish, Time.now)
+
     redirect_to :back
   end
 
