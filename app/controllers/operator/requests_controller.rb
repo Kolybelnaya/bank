@@ -16,6 +16,15 @@ class Operator::RequestsController < ApplicationController
     @requests = current_user.requests.accepted.by_date(DateTime.now.to_date)
   end
 
+  def calculations
+    @q = current_user.requests.search(params[:q])
+    @requests = @q.result.full
+    if params[:q] && params[:q][:date_gteq] && params[:q][:date_lteq] && @requests.any?
+      @info = MassService.run(@requests, Time.strptime(params[:q][:date_gteq],"%d/%m/%Y").to_date,
+                              Time.strptime(params[:q][:date_lteq],"%d/%m/%Y").to_date)
+    end
+  end
+
   def edit
     @request = Request.find(params[:id])
     @requests = current_user.requests.by_date(@request.date).where.not(id: @request.id)

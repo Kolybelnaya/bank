@@ -9,6 +9,7 @@ class Request < ActiveRecord::Base
   belongs_to :operator, class_name: 'User'
 
   scope :by_date, ->(date) { where(date: date)}
+  scope :full, ->() {where.not(start: nil, finish: nil)}
 
   aasm do
     state :added, :initial => true

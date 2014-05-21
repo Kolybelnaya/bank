@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'unaccepted', on: :collection
       get 'completed', on: :collection
       get 'today', on: :collection
+      get 'calculations', on: :collection
       put 'start'
       put 'finish'
       put 'accept'

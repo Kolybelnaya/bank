@@ -31,6 +31,6 @@ class RequestsController < ApplicationController
   end
 
   def print_request(request)
-    'Ваша заявка будет рассмотрена оператором, ожидайте подтверждения по email; Заявленные дата и время: '+I18n.l(request.date)+I18n.l(request.time.in_time_zone('Moscow'))
+    'Ваша заявка будет рассмотрена оператором, ожидайте подтверждения по email; Заявленные дата и время: '+I18n.l(request.date)+I18n.l(request.time.in_time_zone('Tbilisi'))
   end
 end

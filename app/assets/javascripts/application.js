@@ -42,6 +42,7 @@ $(function() {
   setOperator();
 
   var checkin = $('#gteq').datepicker({
+    format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
       if (ev.date.valueOf() > checkout.date.valueOf()) {
         var newDate = new Date(ev.date)
@@ -54,7 +55,9 @@ $(function() {
   var checkout = $('#lteq').datepicker({
     onRender: function(date) {
       return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-    }
+    },
+
+    format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
       checkout.hide();
     }).data('datepicker');
