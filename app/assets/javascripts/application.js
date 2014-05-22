@@ -59,7 +59,6 @@ $(function() {
 
     format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
-      checkout.hide();
     });
 
 
@@ -109,7 +108,6 @@ $(document).on('page:load',function() {
 
     format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
-      checkout.hide();
     });
 
 });
