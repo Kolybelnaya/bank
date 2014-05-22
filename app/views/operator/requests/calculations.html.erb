@@ -16,12 +16,14 @@
   <div class='row'>
     <div class='col-md-12'>
       <%- if @info%>
-          <h3>&lambda;:<%= @info[:lambda].round(3)%></h3>
-          <h3>&mu;:<%= @info[:mu].round(0)%></h3>
-          <h3>&rho;:<%= @info[:ro].round(3)%></h3>
-          <h3>Pn:<%= @info[:piN].round(3)%></h3>
-          <h3>M:<%= @info[:em].round(3)%></h3>
-          <h3>W1:<%= (@info[:w1]*60).round(0)%></h3>
+          <blockquote>
+              <h3><b>Интенсивность &lambda;: </b><%= @info[:lambda].round(3)%>(чел.)</h3>
+              <h3><b>Интенсивность обслуживания требований &mu;: </b><%= @info[:mu].round(0)%>(чел./час)</h3>
+              <h3><b>Загрузка системы &rho;: </b><%= @info[:ro].round(3)%></h3>
+              <h3><b>Вероятность того, что в системе будет N требований Pn: </b><%= @info[:piN].round(3)%></h3>
+              <h3><b>Среднее количество клиентов M: </b><%= @info[:em].round(3)%>(чел.)</h3>
+              <h3><b>Среднее время обслуживания клиентов операторами W1: </b><%= (@info[:w1]*60).round(0)%>(мин.)</h3>
+          </blockquote>
       <% else %>
           <h2>Задайте поиск</h2>
       <% end %>

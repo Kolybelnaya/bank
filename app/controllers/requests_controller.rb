@@ -6,6 +6,9 @@ class RequestsController < ApplicationController
     @request = Request.new()
 
     @requests = @q.result
+
+    @info = MassService.run(Request.full, Request.full.first.date,
+                            Request.full.last.date)
   end
 
   def create

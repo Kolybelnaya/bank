@@ -51,16 +51,16 @@ $(function() {
       }
       checkin.hide();
       $('#lteq')[0].focus();
-    }).data('datepicker');
+    });
   var checkout = $('#lteq').datepicker({
     onRender: function(date) {
-      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+      return '';
     },
 
     format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
       checkout.hide();
-    }).data('datepicker');
+    });
 
 
 });
@@ -101,16 +101,16 @@ $(document).on('page:load',function() {
       }
       checkin.hide();
       $('#lteq')[0].focus();
-    }).data('datepicker');
+    });
   var checkout = $('#lteq').datepicker({
     onRender: function(date) {
-      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+      return '';
     },
 
     format: 'dd/mm/yyyy'
   }).on('changeDate', function(ev) {
       checkout.hide();
-    }).data('datepicker');
+    });
 
 });
 

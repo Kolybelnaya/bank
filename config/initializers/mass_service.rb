@@ -1,7 +1,7 @@
 class MassService
   def self.run(requests, start_date, finish_date)
     days_count = (finish_date - start_date).to_i+1
-    hours_count = days_count==0 ? 8 : days_count*8
+    hours_count = days_count==0 ? 7 : days_count*7
     lambda = requests.count*1.0/hours_count
     n = lambda.round(0) == 0 ? 1 : lambda.round(0)
     mu = self.calculate_mu(requests)
